@@ -1,5 +1,11 @@
 framework:
     cache:
+        default_redis_provider: '%env(REDIS_DSN)%'
+        pools:
+            app.flight_search:
+                adapter: cache.adapter.redis
+                default_lifetime: 3600  # 1 hour
+
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
 
