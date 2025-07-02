@@ -19,7 +19,35 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Service\AirArabiaFlightProvider:
+    App\Application\Handler\Search\AirArabiaFlightSearchHandler:
+        tags:
+            - { name: 'app.flight_search_handler', provider: 'airarabia' }
+
+    App\Application\Handler\Price\AirArabiaFlightPriceHandler:
+        tags:
+            - { name: 'app.flight_price_handler', provider: 'airarabia' }
+
+    App\Infrastructure\Client\AirArabia\AirArabiaRestClient:
         arguments:
-            $httpClient: '@http_client'
-            $flightSearchCache: '@app.flight_search'
+            $authUrl: '%env(AIRARABIA_AUTH_URL)%'
+            $searchUrl: '%env(AIRARABIA_SEARCH_URL)%'
+            $login: '%env(AIRARABIA_LOGIN)%'
+            $password: '%env(AIRARABIA_PASSWORD)%'
+            $agentCode: '%env(AIRARABIA_AGENTCODE)%'
+            $posCountry: '%env(AIRARABIA_POS_COUNTRY)%'
+            $posStation: '%env(AIRARABIA_POS_STATION)%'
+            $currencyCode: '%env(AIRARABIA_CURRENCY)%'
+
+    App\Infrastructure\Client\AirArabia\AirArabiaSoapClient:
+        arguments:
+            $wsdl: '%env(resolve:AIRARABIA_SOAP_WSDL)%'
+            $username: '%env(AIRARABIA_USERID)%'
+            $password: '%env(AIRARABIA_PASSWORD)%'
+            $requestorId: '%env(AIRARABIA_AGENTCODE)%'
+            $terminalId: 'TestUser/Test Runner'
+
+    App\Application\Factory\FlightHandlerFactory:
+        arguments:
+            $searchHandlers: [ ]
+            $priceHandlers: [ ]
+        tags: [ kernel.compiler_pass ]
