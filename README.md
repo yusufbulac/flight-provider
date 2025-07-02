@@ -4,10 +4,12 @@ This project provides a scalable and extensible flight integration layer for Air
 
 ---
 
-## 📦 Technologies
+## Technologies
 
 - PHP 8.3
 - Symfony 7
+- Redis
+- Docker
 - PSR-4 Autoloading
 - SOAP (via `\SoapClient`)
 - REST (via Symfony HttpClient)
@@ -16,7 +18,7 @@ This project provides a scalable and extensible flight integration layer for Air
 
 ---
 
-## ✈️ API Endpoints
+## API Endpoints
 
 ### 1. Search Flights (REST)
 
@@ -89,11 +91,11 @@ Fetches final pricing for a selected flight, using AirArabia’s SOAP pricing AP
 }
 ```
 
-🧮 **Note:** A 10% commission is applied to the total price in the backend.
+ **Note:** A 10% commission is applied to the total price in the backend.
 
 ---
 
-## ⚙️ Configuration
+##️ Configuration
 
 `.env` or Symfony parameters:
 ```env
@@ -104,7 +106,7 @@ AIRARABIA_PASSWORD=...
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Use tools like Postman or `curl` to test the endpoints:
 
@@ -123,7 +125,7 @@ curl -X POST http://localhost:8080/api/flights/search \
 
 ---
 
-## 🏗️ Extensibility
+## Extensibility
 
 The system is built using the **Strategy** and **Factory** patterns:
 
@@ -134,7 +136,7 @@ The system is built using the **Strategy** and **Factory** patterns:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -151,7 +153,7 @@ src/
 
 ---
 
-## 🧼 TODOs
+## TODOs
 
 - [ ] Implement DTO-based response mapping from SOAP XML
 - [ ] Add support for bundled services in pricing response
@@ -160,6 +162,3 @@ src/
 
 ---
 
-## 👨‍💻 Maintainer
-
-Yusuf Bulaç
